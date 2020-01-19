@@ -1,4 +1,10 @@
 # 📦 EZCache
+<p>
+    <img src="https://img.shields.io/badge/Swift-5.1-orange.svg" />
+    <a href="https://swift.org/package-manager">
+        <img src="https://img.shields.io/badge/swiftpm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
+    </a>
+</p>
 
 A lightweight caching and data retrieval library for iOS which aims to be as non-intrusive as possible. To see example usage of EZCache check out the [sample project repository](https://github.com/chackle/EZCache).
 
