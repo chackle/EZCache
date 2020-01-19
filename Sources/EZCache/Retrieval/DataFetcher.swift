@@ -1,6 +1,6 @@
 //
 //  DataFetcher.swift
-//  Cache
+//  EZCache
 //
 //  Created by Michael Green on 21/12/2019.
 //  Copyright © 2019 Michael Green. All rights reserved.

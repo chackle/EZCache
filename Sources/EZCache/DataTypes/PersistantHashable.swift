@@ -1,6 +1,6 @@
 //
-//  PersistantHashing.swift
-//  Cache
+//  PersistantHashable.swift
+//  EZCache
 //
 //  Created by Michael Green on 29/12/2019.
 //  Copyright © 2019 Michael Green. All rights reserved.

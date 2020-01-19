@@ -1,6 +1,6 @@
 //
 //  CacheableImage.swift
-//  Cache
+//  EZCache
 //
 //  Created by Michael Green on 30/12/2019.
 //  Copyright © 2019 Michael Green. All rights reserved.

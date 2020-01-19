@@ -1,6 +1,6 @@
 //
 //  Cache.swift
-//  Cache
+//  EZCache
 //
 //  Created by Michael Green on 27/12/2019.
 //  Copyright © 2019 Michael Green. All rights reserved.
