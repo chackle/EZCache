@@ -1,6 +1,6 @@
 # 📦 EZCache
 
-A lightweight caching and data retrieval library for iOS which aims to be as non-intrusive as possible.
+A lightweight caching and data retrieval library for iOS which aims to be as non-intrusive as possible. To see example usage of EZCache check out the [sample project repository](https://github.com/chackle/EZCache).
 
 ## 🎯 Project aim
 
