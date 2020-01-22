@@ -17,7 +17,7 @@ public protocol Cacheable {
 }
 
 public extension Cacheable {
-  static var subdirectoryName: String { return "\(Self.self)" }
+  static var subdirectoryName: String { return String(describing: Self.self) }
   static var fileExtension: String { return "" }
   static var storagePolicy: StoragePolicy { return .refresh }
 }
