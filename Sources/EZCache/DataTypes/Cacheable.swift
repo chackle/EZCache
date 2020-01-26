@@ -17,19 +17,19 @@ public protocol Cacheable {
 }
 
 public extension Cacheable {
-  static var subdirectoryName: String { return String(describing: Self.self) }
-  static var fileExtension: String { return "" }
-  static var storagePolicy: StoragePolicy { return .refresh }
+  static var subdirectoryName: String { String(describing: Self.self) }
+  static var fileExtension: String { "" }
+  static var storagePolicy: StoragePolicy { .refresh }
 }
 
 public extension Cacheable where Self: Codable {
   
   static func decode(from data: Data) throws -> Self {
-    return try JSONDecoder().decode(Self.self, from: data)
+    try JSONDecoder().decode(Self.self, from: data)
   }
   
   func toData() throws -> Data? {
-    return try JSONEncoder().encode(self)
+    try JSONEncoder().encode(self)
   }
 }
 
@@ -39,14 +39,14 @@ extension Array: Cacheable where Element: Cacheable & Codable {
     if "\(Self.self)" == "Array<\(Element.subdirectoryName)>" { return "\(Self.self)" }
     return Element.subdirectoryName
   }
-  public static var fileExtension: String { return Element.fileExtension }
-  public static var storagePolicy: StoragePolicy { return Element.storagePolicy }
+  public static var fileExtension: String { Element.fileExtension }
+  public static var storagePolicy: StoragePolicy { Element.storagePolicy }
   
   public static func decode(from data: Data) throws -> Array<Element> {
-    return try JSONDecoder().decode(Self.self, from: data)
+    try JSONDecoder().decode(Self.self, from: data)
   }
   
   public func toData() throws -> Data? {
-    return try JSONEncoder().encode(self)
+    try JSONEncoder().encode(self)
   }
 }

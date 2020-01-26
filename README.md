@@ -41,17 +41,17 @@ self.dataFetcher.fetch(from: URL("http://www.myurl.com/data")!) { (result) in
 ``` swift
 extension CacheableImage: Cacheable {
   
-  public static var subdirectoryName: String { return "images" }
-  public static var fileExtension: String { return ".png" }
-  public static var storagePolicy: StoragePolicy { return .allowStale }
+  public static var subdirectoryName: String { "images" }
+  public static var fileExtension: String { ".png" }
+  public static var storagePolicy: StoragePolicy { .allowStale }
   
   public static func decode(from data: Data) throws -> CacheableImage {
     guard let image = UIImage(data: data) else { throw CachingError.decodingFailed }
-    return CacheableImage(image)
+    CacheableImage(image)
   }
   
   public func toData() throws -> Data? {
-    return self.rawValue.pngData()
+    self.rawValue.pngData()
   }
 }
 ```
@@ -62,8 +62,7 @@ extension CacheableImage: Cacheable {
 - [x] Introduce `StoragePolicy` to allow state data refreshing or ignorance
 - [x] Streamline `Cacheable` implementation by providing default values and functions
 - [x] Change any remaining synchronous calls into asynchronous or provide both
-- [ ] Allow `DataFetcher` to be constructed with a passed `Cache` instance, but default to a shared singleton instance if none is provided
+- [ ] Allow `DataFetcher` to be constructed with a passed `Cache` instance, but set default if none provided
 - [ ] Introduce `UIImageView` helper or subclass for making network calls even simpler
-- [ ] Tidy up code
 - [ ] Provide useful comments
 - [ ] Add some basic tests for error throwing

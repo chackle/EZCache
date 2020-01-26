@@ -51,7 +51,7 @@ public final class DataFetcher<V: Cacheable>: DataFetcherProtocol {
   
   // MARK: Data Retrieval
   public func fetchFromCache(usingKey key: K) -> V? {
-    return self.cache[key]
+    self.cache[key]
   }
   
   public func fetchFromLocalStorage(usingKey key: K, withCompletionHandler handler: @escaping CompletionHandler) {

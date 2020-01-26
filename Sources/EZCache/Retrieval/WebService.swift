@@ -13,7 +13,7 @@ public class WebService<V: Cacheable> {
   typealias CompletionHandler = ((_ result: Result<V, Error>) -> Void)
 
   var session: URLSession {
-    return URLSession.shared
+    URLSession.shared
   }
   
   required init() {

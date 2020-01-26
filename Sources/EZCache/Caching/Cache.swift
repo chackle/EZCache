@@ -20,7 +20,7 @@ public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   private let providedDate: () -> Date
   private let valueLifetime: TimeInterval
   let keyTracker = KeyTracker()
-  var cacheDirectory: URL { return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first! }
+  var cacheDirectory: URL { FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first! }
   
   init(providedDate: @escaping () -> Date = Date.init,
        valueLifetime: TimeInterval = 12 * 60 * 60, maximumNumberOfEntries: Int = 128) {
@@ -42,7 +42,7 @@ public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   }
   
   func value(forKey key: Key) -> Value? {
-    return self.value(forKey: key)?.value
+    self.value(forKey: key)?.value
   }
   
   func removeValue(forKey key: Key) {
@@ -68,7 +68,7 @@ private extension Cache {
 
 extension Cache {
   subscript(key: Key) -> Value? {
-    get { return self.value(forKey: key) }
+    get { self.value(forKey: key) }
     set {
       guard let value = newValue else { return self.removeValue(forKey: key) }
       self.store(value, forKey: key)
@@ -98,7 +98,7 @@ extension Cache {
     }
     
     override var hash: Int {
-      return self.key.hashValue
+      self.key.hashValue
     }
     
     override func isEqual(_ object: Any?) -> Bool {

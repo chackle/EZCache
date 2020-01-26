@@ -20,9 +20,9 @@ public struct CacheableImage {
 
 extension CacheableImage: Cacheable {
   
-  public static var subdirectoryName: String { return "images" }
-  public static var fileExtension: String { return ".png" }
-  public static var storagePolicy: StoragePolicy { return .allowStale }
+  public static var subdirectoryName: String { "images" }
+  public static var fileExtension: String { ".png" }
+  public static var storagePolicy: StoragePolicy { .allowStale }
   
   public static func decode(from data: Data) throws -> CacheableImage {
     guard let image = UIImage(data: data) else { throw CachingError.decodingFailed }
@@ -30,7 +30,7 @@ extension CacheableImage: Cacheable {
   }
   
   public func toData() throws -> Data? {
-    return self.rawValue.pngData()
+    self.rawValue.pngData()
   }
 }
 #endif
