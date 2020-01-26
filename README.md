@@ -61,8 +61,9 @@ extension CacheableImage: Cacheable {
 - [x] Provide real error handling
 - [x] Introduce `StoragePolicy` to allow state data refreshing or ignorance
 - [x] Streamline `Cacheable` implementation by providing default values and functions
-- [ ] Change any remaining synchronous calls into asynchronous or provide both
+- [x] Change any remaining synchronous calls into asynchronous or provide both
 - [ ] Allow `DataFetcher` to be constructed with a passed `Cache` instance, but default to a shared singleton instance if none is provided
 - [ ] Introduce `UIImageView` helper or subclass for making network calls even simpler
 - [ ] Tidy up code
 - [ ] Provide useful comments
+- [ ] Add some basic tests for error throwing

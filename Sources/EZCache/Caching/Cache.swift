@@ -14,7 +14,7 @@ public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   typealias StorageCompletionHandler = (_ result: Result<[FileURL], Error>) -> Void
   typealias LoadingCompletionHandler = (_ result: Result<Value, Error>) -> Void
   
-  let dispatchQueue = DispatchQueue(label: "com.chackle.EZCache", qos: .userInitiated)
+  let dispatchQueue = DispatchQueue(label: "com.chackle.EZCache", qos: .background)
   
   private let cache = NSCache<CacheKey, CachedValue>()
   private let providedDate: () -> Date
