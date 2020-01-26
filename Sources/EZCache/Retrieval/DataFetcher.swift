@@ -67,7 +67,8 @@ public final class DataFetcher<V: Cacheable>: DataFetcherProtocol {
     self.webService.fetchData(fromURL: url) { (result) in
       if case let .success(data) = result {
         self.cache[url] = data
-        try? self.cache.writeToDisk()
+        // TODO: Should singular errors be handled within a batch write?
+        self.cache.writeToDisk { (_) in }
         handler(result)
       }
     }

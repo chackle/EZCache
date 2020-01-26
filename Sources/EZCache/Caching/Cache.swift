@@ -10,7 +10,8 @@ import Foundation
 
 public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   
-  typealias StorageCompletionHandler = (_ result: Result<[URL], Error>) -> Void
+  typealias FileURL = (url: URL, error: Error?)
+  typealias StorageCompletionHandler = (_ result: Result<[FileURL], Error>) -> Void
   typealias LoadingCompletionHandler = (_ result: Result<Value, Error>) -> Void
   
   let dispatchQueue = DispatchQueue(label: "com.chackle.EZCache", qos: .userInitiated)
@@ -122,14 +123,26 @@ extension Cache {
 }
 
 extension Cache {
-  func writeToDisk() throws {
-    for key in self.keyTracker.keys {
-      guard let persistantHash = key.persistantHash else { throw CachingError.persistantHashNotFound }
-      let folderURL = self.cacheDirectory.appendingPathComponent(Value.subdirectoryName)
-      let fileURL = folderURL.appendingPathComponent(String(persistantHash) + Value.fileExtension)
-      guard let data = try self.value(forKey: key)?.toData() else { throw CachingError.encodingFailed }
-      try FileManager.default.createDirectory(atPath: folderURL.path, withIntermediateDirectories: true, attributes: nil)
-      try data.write(to: fileURL)
+  
+  func writeToDisk(withCompletionHandler handler: @escaping StorageCompletionHandler) {
+    self.dispatchQueue.async {
+      var urls = [FileURL]()
+      for key in self.keyTracker.keys {
+        guard let persistantHash = key.persistantHash else { return handler(.failure(CachingError.persistantHashNotFound)) }
+        let folderURL = self.cacheDirectory.appendingPathComponent(Value.subdirectoryName)
+        let fileURL = folderURL.appendingPathComponent(String(persistantHash) + Value.fileExtension)
+        do {
+          guard let data = try self.value(forKey: key)?.toData() else { return handler(.failure(CachingError.encodingFailed)) }
+          try FileManager.default.createDirectory(atPath: folderURL.path, withIntermediateDirectories: true, attributes: nil)
+          try data.write(to: fileURL)
+          urls.append(FileURL(url: fileURL, error: nil))
+        } catch {
+          urls.append(FileURL(url: fileURL, error: error))
+        }
+      }
+      DispatchQueue.main.async {
+        handler(.success(urls))
+      }
     }
   }
   
