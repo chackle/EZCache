@@ -11,8 +11,8 @@ import Foundation
 public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   
   typealias FileURL = (url: URL, error: Error?)
-  typealias StorageCompletionHandler = (_ result: Result<[FileURL], Error>) -> Void
-  typealias LoadingCompletionHandler = (_ result: Result<Value, Error>) -> Void
+  public typealias StorageCompletionHandler = (_ result: Result<[FileURL], Error>) -> Void
+  public typealias LoadingCompletionHandler = (_ result: Result<Value, Error>) -> Void
   
   let dispatchQueue = DispatchQueue(label: "com.chackle.EZCache", qos: .background)
   
