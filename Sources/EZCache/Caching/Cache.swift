@@ -30,19 +30,19 @@ public final class Cache<Key: PersistantHashable, Value: Cacheable> {
     self.cache.delegate = self.keyTracker
   }
   
-  func store(_ value: Value, forKey key: Key) {
+  public func store(_ value: Value, forKey key: Key) {
     let date = self.providedDate().addingTimeInterval(self.valueLifetime)
     let cachedValue = CachedValue(associatedKey: key, value: value, expirationDate: date)
     self.store(cachedValue)
   }
   
+  public func value(forKey key: Key) -> Value? {
+    self.value(forKey: key)?.value
+  }
+  
   func store(_ value: CachedValue) {
     self.cache.setObject(value, forKey: CacheKey(value.associatedKey))
     self.keyTracker.keys.insert(value.associatedKey)
-  }
-  
-  func value(forKey key: Key) -> Value? {
-    self.value(forKey: key)?.value
   }
   
   func removeValue(forKey key: Key) {
