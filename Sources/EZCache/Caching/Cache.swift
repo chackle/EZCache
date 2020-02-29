@@ -54,6 +54,17 @@ public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   }
 }
 
+
+public extension Cache {
+  subscript(key: Key) -> Value? {
+    get { self.value(forKey: key) }
+    set {
+      guard let value = newValue else { return self.removeValue(forKey: key) }
+      self.store(value, forKey: key)
+    }
+  }
+}
+
 private extension Cache {
   
   func value(forKey key: Key) -> CachedValue? {
@@ -63,16 +74,6 @@ private extension Cache {
       return nil
     }
     return value
-  }
-}
-
-extension Cache {
-  subscript(key: Key) -> Value? {
-    get { self.value(forKey: key) }
-    set {
-      guard let value = newValue else { return self.removeValue(forKey: key) }
-      self.store(value, forKey: key)
-    }
   }
 }
 
