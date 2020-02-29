@@ -124,7 +124,7 @@ extension Cache {
 
 extension Cache {
   
-  func writeToDisk(withCompletionHandler handler: @escaping StorageCompletionHandler) {
+  public func writeToDisk(withCompletionHandler handler: @escaping StorageCompletionHandler) {
     self.dispatchQueue.async {
       var urls = [FileURL]()
       for key in self.keyTracker.keys {
@@ -146,7 +146,7 @@ extension Cache {
     }
   }
   
-  func loadFromDisk(withKey key: Key, withCompletionHandler handler: @escaping LoadingCompletionHandler) {
+  public func loadFromDisk(withKey key: Key, withCompletionHandler handler: @escaping LoadingCompletionHandler) {
     guard let persistantHash = key.persistantHash else { return handler(.failure(CachingError.persistantHashNotFound)) }
     self.dispatchQueue.async {
       let dataPathComponent = Value.subdirectoryName + "/" + String(persistantHash)
