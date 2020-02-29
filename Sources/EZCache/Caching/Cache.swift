@@ -10,7 +10,7 @@ import Foundation
 
 public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   
-  typealias FileURL = (url: URL, error: Error?)
+  public typealias FileURL = (url: URL, error: Error?)
   public typealias StorageCompletionHandler = (_ result: Result<[FileURL], Error>) -> Void
   public typealias LoadingCompletionHandler = (_ result: Result<Value, Error>) -> Void
   
