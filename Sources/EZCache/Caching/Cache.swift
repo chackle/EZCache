@@ -22,7 +22,7 @@ public final class Cache<Key: PersistantHashable, Value: Cacheable> {
   let keyTracker = KeyTracker()
   var cacheDirectory: URL { FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first! }
   
-  init(providedDate: @escaping () -> Date = Date.init,
+  public init(providedDate: @escaping () -> Date = Date.init,
        valueLifetime: TimeInterval = 12 * 60 * 60, maximumNumberOfEntries: Int = 128) {
     self.providedDate = providedDate
     self.valueLifetime = valueLifetime
