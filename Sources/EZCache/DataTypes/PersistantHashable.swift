@@ -20,6 +20,12 @@ extension String: Persistant {
   }
 }
 
+extension Int: Persistant {
+  public var persistantHash: Int? {
+    return String(self).persistantHash
+  }
+}
+
 extension URL: Persistant {
   public var persistantHash: Int? {
     return self.absoluteString.persistantHash
